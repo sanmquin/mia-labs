@@ -10,7 +10,7 @@ import torch
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "Intro-NN", "labs"))
 
-from maze_tesseract_v5_cpu import (
+from maze_tesseract import (
     LabyrinthTransformer,
     generate_maze_set,
     evaluate_model,

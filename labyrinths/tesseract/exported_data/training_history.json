@@ -1,0 +1,84 @@
+{
+  "runs": [
+    {
+      "version": "v1",
+      "name": "Plain CE Baseline",
+      "epochs": 100,
+      "train_mazes": 120,
+      "test_mazes": 30,
+      "success_rate": 60.0,
+      "optimal_rate": 50.0,
+      "efficiency": 0.0,
+      "loss_type": "Plain Cross-Entropy",
+      "notes": "Learns basic corridor-following but fails at critical fork decisions due to equal weight dilution."
+    },
+    {
+      "version": "v2",
+      "name": "Tesseract Loss (Sparse)",
+      "epochs": 100,
+      "train_mazes": 120,
+      "test_mazes": 30,
+      "success_rate": 66.67,
+      "optimal_rate": 40.0,
+      "efficiency": 0.0,
+      "loss_type": "Tesseract Structured Loss",
+      "notes": "Loss structure alone improves success rate by 6.7% but exhibits a tradeoff with path optimality at low data scale."
+    },
+    {
+      "version": "v3",
+      "name": "All-Position BFS (Dense)",
+      "epochs": 80,
+      "train_mazes": 300,
+      "test_mazes": 30,
+      "success_rate": 83.33,
+      "optimal_rate": 33.33,
+      "efficiency": 0.0,
+      "loss_type": "Tesseract Structured Loss",
+      "notes": "Denser multi-direction training. Plain CE baseline collapses to 36.67% on this distribution, highlighting Tesseract's robustness."
+    },
+    {
+      "version": "v4",
+      "name": "Extended Training",
+      "epochs": 240,
+      "train_mazes": 300,
+      "test_mazes": 30,
+      "success_rate": 100.0,
+      "optimal_rate": 53.0,
+      "efficiency": 88.0,
+      "loss_type": "Tesseract Structured Loss",
+      "notes": "Extended training and Cosine Annealing allows the model to digest structural signal and achieve perfect test success."
+    },
+    {
+      "version": "v5",
+      "name": "Second Seed (Final)",
+      "epochs": 240,
+      "train_mazes": 300,
+      "test_mazes": 30,
+      "success_rate": 100.0,
+      "optimal_rate": 60.0,
+      "efficiency": 90.0,
+      "loss_type": "Tesseract Structured Loss",
+      "notes": "Continued training on a second seed resolves the optimality tradeoff, raising both optimal rate and efficiency."
+    }
+  ],
+  "stress_test": {
+    "tesseract_success": 99.0,
+    "ce_baseline_success": 21.8,
+    "seeds": [
+      999,
+      2024,
+      7777,
+      31415,
+      54321
+    ],
+    "num_mazes": 500
+  },
+  "per_cell_val_accuracy_v4": {
+    "early-corridor": 50.4,
+    "early-fork": 58.4,
+    "mid-corridor": 62.6,
+    "mid-fork": 73.3,
+    "endgame-corridor": 75.5,
+    "endgame-fork": 69.8
+  }
+}
